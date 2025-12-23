@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Filters from '../components/Filters'
 import ProductGrid from '../components/ProductGrid'
-import { X } from 'lucide-react'
+import { XIcon } from './_app' 
 
 export async function getServerSideProps() {
   try {
@@ -11,7 +11,7 @@ export async function getServerSideProps() {
     if (!res.ok) throw new Error('Failed to fetch')
     const products = await res.json()
     return { props: { products } }
-  } catch (error) {
+  } catch {
     return { props: { products: [] } }
   }
 }
@@ -61,6 +61,7 @@ export default function Home({ products }) {
   return (
     <div className="layout-wrapper">
       <Header onSearch={query => setSearchQuery(query)} />
+
       <main>
         <section className="hero-section">
           <div className="hero-content">
@@ -93,7 +94,11 @@ export default function Home({ products }) {
         <div className="plp-main">
           {showFilter && (
             <div className="filters-desktop desktop-only">
-              <Filters selectedFilters={selectedFilters} onFilterChange={handleFilterChange} onClearAll={handleClearAll} />
+              <Filters
+                selectedFilters={selectedFilters}
+                onFilterChange={handleFilterChange}
+                onClearAll={handleClearAll}
+              />
             </div>
           )}
           <ProductGrid products={displayProducts} showFilter={showFilter} />
@@ -106,14 +111,19 @@ export default function Home({ products }) {
           <div className="mobile-sidebar open">
             <div className="sidebar-header">
               <h3>FILTERS</h3>
-              <X onClick={() => setIsMobileFilterOpen(false)} style={{ cursor: 'pointer' }} />
+              <XIcon onClick={() => setIsMobileFilterOpen(false)} style={{ cursor: 'pointer' }} />
             </div>
             <div className="mobile-filter-content">
-              <Filters selectedFilters={selectedFilters} onFilterChange={handleFilterChange} onClearAll={handleClearAll} />
+              <Filters
+                selectedFilters={selectedFilters}
+                onFilterChange={handleFilterChange}
+                onClearAll={handleClearAll}
+              />
             </div>
           </div>
         </div>
       )}
+
       <Footer />
     </div>
   )

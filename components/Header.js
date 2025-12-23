@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Search, Heart, ShoppingBag, User, ChevronDown, Menu, X, Star } from 'lucide-react'
 import Link from 'next/link'
+import { MenuIcon, XIcon, SearchIcon, HeartIcon, ShoppingBagIcon, UserIcon, StarIcon } from '../pages/_app'
 
 export default function Header({ onSearch }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -31,8 +31,8 @@ export default function Header({ onSearch }) {
     <header className="main-header">
       <div className="header-top">
         <div className="header-left">
-          <Menu className="hamburger-icon mobile-only" onClick={() => setIsMenuOpen(true)} />
-          <div className="logo-icon"><Star size={28} strokeWidth={1.5} /></div>
+          <MenuIcon className="hamburger-icon mobile-only" onClick={() => setIsMenuOpen(true)} />
+          <div className="logo-icon"><StarIcon size={28} strokeWidth={1.5} /></div>
         </div>
         <div className="header-center">
           <Link href="/"><h1 className="logo-text">LOGO</h1></Link>
@@ -52,22 +52,23 @@ export default function Header({ onSearch }) {
               />
             )}
             {isSearchOpen ? (
-              <X size={18} onClick={resetSearch} className="cursor-pointer" />
+              <XIcon size={18} onClick={resetSearch} className="cursor-pointer" />
             ) : (
-              <Search size={20} onClick={() => setIsSearchOpen(true)} className="cursor-pointer" />
+              <SearchIcon size={20} onClick={() => setIsSearchOpen(true)} className="cursor-pointer" />
             )}
           </div>
           <Link href="/wishlist" className="icon-badge-wrapper">
-            <Heart size={20} />
+            <HeartIcon size={20} />
             {wishlistCount > 0 && <span className="badge">{wishlistCount}</span>}
           </Link>
           <Link href="/cart" className="icon-badge-wrapper">
-            <ShoppingBag size={20} />
+            <ShoppingBagIcon size={20} />
             {cartCount > 0 && <span className="badge">{cartCount}</span>}
           </Link>
-          <Link href="/profile" className="desktop-only"><User size={20} /></Link>
+          <Link href="/profile" className="desktop-only"><UserIcon size={20} /></Link>
         </div>
       </div>
+
       <nav className="main-nav">
         {navItems.map(item => (
           <Link key={item} href={item === 'SHOP' ? '/' : '/work-in-progress'} className="nav-link">
@@ -75,11 +76,12 @@ export default function Header({ onSearch }) {
           </Link>
         ))}
       </nav>
+
       {isMenuOpen && (
         <>
           <div className="sidebar-overlay" onClick={() => setIsMenuOpen(false)} />
           <div className="mobile-sidebar open">
-            <X size={22} onClick={() => setIsMenuOpen(false)} />
+            <XIcon size={22} onClick={() => setIsMenuOpen(false)} />
             <div className="mobile-nav">
               {navItems.map(item => (
                 <Link key={item} href={item === 'SHOP' ? '/' : '/work-in-progress'} className="nav-link" onClick={() => setIsMenuOpen(false)}>

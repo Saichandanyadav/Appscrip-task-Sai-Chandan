@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import { Instagram, Linkedin, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState } from 'react'
+import { InstagramIcon, LinkedinIcon, ChevronDownIcon, ChevronUpIcon } from '../pages/_app'
 
 export default function Footer() {
-  const [openSection, setOpenSection] = useState(null);
-
-  const toggleSection = (section) => {
-    setOpenSection(openSection === section ? null : section);
-  };
+  const [openSection, setOpenSection] = useState(null)
+  const toggleSection = section => setOpenSection(openSection === section ? null : section)
 
   return (
     <footer className="main-footer">
@@ -47,9 +44,7 @@ export default function Footer() {
           <div className="footer-links-column">
             <div className="column-header" onClick={() => toggleSection('metta')}>
               <h3>mettā muse</h3>
-              <div className="mobile-icon">
-                {openSection === 'metta' ? <ChevronUp /> : <ChevronDown />}
-              </div>
+              <div className="mobile-icon">{openSection === 'metta' ? <ChevronUpIcon /> : <ChevronDownIcon />}</div>
             </div>
             <ul className={openSection === 'metta' ? 'open' : ''}>
               <li>About Us</li>
@@ -64,9 +59,7 @@ export default function Footer() {
           <div className="footer-links-column">
             <div className="column-header" onClick={() => toggleSection('quick')}>
               <h3>QUICK LINKS</h3>
-              <div className="mobile-icon">
-                {openSection === 'quick' ? <ChevronUp /> : <ChevronDown />}
-              </div>
+              <div className="mobile-icon">{openSection === 'quick' ? <ChevronUpIcon /> : <ChevronDownIcon />}</div>
             </div>
             <ul className={openSection === 'quick' ? 'open' : ''}>
               <li>Orders & Shipping</li>
@@ -82,13 +75,11 @@ export default function Footer() {
             <div className="social-group">
               <div className="column-header" onClick={() => toggleSection('follow')}>
                 <h3>FOLLOW US</h3>
-                <div className="mobile-icon">
-                  {openSection === 'follow' ? <ChevronUp /> : <ChevronDown />}
-                </div>
+                <div className="mobile-icon">{openSection === 'follow' ? <ChevronUpIcon /> : <ChevronDownIcon />}</div>
               </div>
               <div className={`social-icons ${openSection === 'follow' ? 'open' : ''}`}>
-                <div className="icon-circle"><Instagram size={20} /></div>
-                <div className="icon-circle"><Linkedin size={20} /></div>
+                <div className="icon-circle"><InstagramIcon size={20} /></div>
+                <div className="icon-circle"><LinkedinIcon size={20} /></div>
               </div>
             </div>
 
@@ -111,5 +102,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }

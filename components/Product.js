@@ -1,5 +1,8 @@
 import Link from 'next/link'
-import { Heart, Trash2 } from 'lucide-react'
+import dynamic from 'next/dynamic'
+
+const HeartIcon = dynamic(() => import('lucide-react').then(mod => mod.Heart), { ssr: false })
+const Trash2Icon = dynamic(() => import('lucide-react').then(mod => mod.Trash2), { ssr: false })
 
 export default function Product({ product, isLiked, onToggleWishlist, showRemove = false }) {
   return (
@@ -12,14 +15,14 @@ export default function Product({ product, isLiked, onToggleWishlist, showRemove
           <div className="card-header">
             <h3 className="product-title">{product.title}</h3>
             {!showRemove && (
-              <div 
-                className="wishlist-icon-container" 
+              <div
+                className="wishlist-icon-container"
                 onClick={(e) => onToggleWishlist(e, product)}
               >
-                <Heart 
-                  size={20} 
-                  className={isLiked ? 'liked' : ''} 
-                  fill={isLiked ? "currentColor" : "none"}
+                <HeartIcon
+                  size={20}
+                  className={isLiked ? 'liked' : ''}
+                  fill={isLiked ? 'currentColor' : 'none'}
                 />
               </div>
             )}
@@ -29,7 +32,7 @@ export default function Product({ product, isLiked, onToggleWishlist, showRemove
       </Link>
       {showRemove && (
         <button className="remove-btn" onClick={() => onToggleWishlist(null, product)}>
-          <Trash2 size={16} /> REMOVE
+          <Trash2Icon size={16} /> REMOVE
         </button>
       )}
     </div>
