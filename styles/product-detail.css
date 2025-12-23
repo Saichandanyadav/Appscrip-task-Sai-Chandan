@@ -1,0 +1,120 @@
+.product-detail-page {
+  padding: 100px 20px;
+  background: #fff;
+}
+
+.product-detail-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.product-image-box {
+  background: #f8f8f8;
+  padding: 60px;
+  border-radius: 14px;
+}
+
+.product-image-box img {
+  width: 100%;
+  height: 420px;
+  object-fit: contain;
+}
+
+.product-info h1 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.product-price {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+.product-desc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+.primary-btn {
+  padding: 16px 40px;
+  background: #000;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.primary-btn:hover {
+  background: #222;
+}
+
+.toast-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+  animation: slideIn 0.3s ease-out;
+}
+
+.toast-content {
+  background: #000;
+  color: #fff;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.toast-content span {
+  color: #4BB543;
+  font-weight: bold;
+}
+
+.toast-content p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1024px) {
+  .product-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .toast-notification {
+    top: auto;
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 90%;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateY(100%) translateX(50%); opacity: 0; }
+    to { transform: translateY(0) translateX(50%); opacity: 1; }
+  }
+}
