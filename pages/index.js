@@ -11,7 +11,7 @@ export async function getServerSideProps() {
     if (!res.ok) throw new Error('Failed to fetch')
     const products = await res.json()
     return { props: { products } }
-  } catch (error) {
+  } catch {
     return { props: { products: [] } }
   }
 }
@@ -23,6 +23,15 @@ export default function Home({ products }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState('recommended')
   const [selectedFilters, setSelectedFilters] = useState([])
+  const [wishlistCount, setWishlistCount] = useState(0)
+  const [cartCount, setCartCount] = useState(0)
+
+  useEffect(() => {
+    const storedWishlist = JSON.parse(localStorage.getItem('wishlist') || '[]')
+    const storedCart = JSON.parse(localStorage.getItem('cart') || '[]')
+    setWishlistCount(storedWishlist.length)
+    setCartCount(storedCart.length)
+  }, [])
 
   const handleFilterChange = categoryId => {
     setSelectedFilters(prev =>
@@ -60,7 +69,8 @@ export default function Home({ products }) {
 
   return (
     <div className="layout-wrapper">
-      <Header onSearch={query => setSearchQuery(query)} />
+      <Header wishlistCount={wishlistCount} cartCount={cartCount} onSearch={setSearchQuery} />
+
       <main>
         <section className="hero-section">
           <div className="hero-content">
@@ -114,6 +124,7 @@ export default function Home({ products }) {
           </div>
         </div>
       )}
+
       <Footer />
     </div>
   )
