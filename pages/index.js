@@ -3,15 +3,21 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Filters from '../components/Filters'
 import ProductGrid from '../components/ProductGrid'
-import { XIcon } from './_app' 
+import { XIcon } from './_app'
 
 export async function getServerSideProps() {
+  const API_URL = 'https://fakestoreapi.com/products'
+
   try {
-    const res = await fetch('https://fakestoreapi.com/products')
-    if (!res.ok) throw new Error('Failed to fetch')
+    const res = await fetch(API_URL)
+    if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`)
     const products = await res.json()
-    return { props: { products } }
-  } catch {
+
+    // Ensure products is always an array
+    return { props: { products: Array.isArray(products) ? products : [] } }
+  } catch (error) {
+    console.error('Error fetching products:', error.message)
+    // Fallback empty array
     return { props: { products: [] } }
   }
 }
